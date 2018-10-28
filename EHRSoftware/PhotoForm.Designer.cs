@@ -50,6 +50,7 @@
             this.Controls.Add(this.imageBox);
             this.Name = "PhotoForm";
             this.Text = "PhotoForm";
+            this.Load += new System.EventHandler(this.PhotoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
             this.ResumeLayout(false);
 

@@ -16,5 +16,10 @@ namespace EHRSoftware
         {
             InitializeComponent();
         }
+
+        private void PhotoForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

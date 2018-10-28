@@ -178,5 +178,50 @@ namespace EHRSoftware
         {
             Application.Exit();
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            // Connection String asscoaited with my Database
+            string conString = "Data Source=DESKTOP-QOR8COA\\SQLEXPRESS;Initial Catalog=EHR_DB;Integrated Security=True";
+
+            // SqlConnection object created, so we can open a connection, and call a command with the connection
+            SqlConnection con = new SqlConnection(conString);
+
+            try
+            {
+                // Open Connection
+                con.Open();
+
+                // Initialize a SQL command string
+                string q;
+                string q2;
+
+                string patID = this.dataGridView1.CurrentRow.Cells["IDCol"].Value.ToString();
+
+                // Selecting everything from the specified patient's table from the database
+                // The images, info, and dates are all loaded
+                q = "DELETE FROM PatientTable WHERE ID=" + patID;
+
+                // Create command linked to the connected database
+                SqlCommand cmd = new SqlCommand(q, con);
+
+                //Execute Command
+                cmd.ExecuteNonQuery();
+
+                q2 = "DROP TABLE patientNum" + patID;
+
+                // Create command linked to the connected database
+                SqlCommand cmd2 = new SqlCommand(q2, con);
+
+                cmd2.ExecuteNonQuery();
+
+                MessageBox.Show("Patient Number " + patID + " Deleted From System.");
+                populate();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error");
+            }
+        }
     }
 }
